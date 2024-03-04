@@ -1,0 +1,14 @@
+OrderId,Description,Quantity,Unit_Price,Total,Date,Address
+100,Battery,5.00,10.00,50.00,2024-01-10,25\,Terna
+101,Tab,4.00,21.00,84.00,2024-01-11,21\,Mt.Kailas
+101,Mouse,1.00,10.00,10.00,2024-01-11,21\,Mt.Kailas
+102,USB-C Charging Cable,3.00,12.99,38.97,2024-01-13,25\,Murfy Villa
+102,Lightning Charging Cable,2.00,14.99,29.98,2024-01-13,25\,Murfy Villa
+102,Apple Airpods Headphones,3.00,149.99,449.97,2024-01-13,25\,Murfy Villa
+103,Apple Airpods Headphones,3.00,149.99,449.97,2024-01-13,23\,Terna
+104,Lightning Charging Cable,2.00,14.99,29.98,2024-01-13,12\,werweeqw
+105,Apple Airpods Headphones,2.00,149.99,299.98,2024-01-13,25\,Terna Clg
+105,Lightning Charging Cable,3.00,14.99,44.97,2024-01-13,25\,Terna Clg
+106,Lightning Charging Cable,2.00,14.99,29.98,2024-01-13,21\,Fanh
+107,Apple Airpods Headphones,2.00,149.99,299.98,2024-01-16,11\,Terna
+107,iPhone,2.00,699.99,1399.98,2024-01-16,11\,Terna
