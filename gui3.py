@@ -14,7 +14,7 @@ import tkinter
 from docxtpl import DocxTemplate
 from datetime import *
 from mysql.connector import *
-import conect
+
 
 import gui0
 import gui5

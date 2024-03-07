@@ -14,9 +14,12 @@ import tkinter
 from docxtpl import DocxTemplate
 from datetime import *
 from mysql.connector import *
+from tkinter import Entry, END
+
 
 import gui3
-
+f1=("Arial",15,"bold")
+f2=("Arial",10,"bold")
 #Path(r"E:/Python/Storerp/assets/frame5/")
 class Page5:
     global con,cursor
@@ -28,12 +31,13 @@ class Page5:
            
         )
     cursor = con.cursor()
+    
         
     def box(self):
         global products,prices_list
         try:
-            sql1="select p_name from stock_1"
-            cursor.execute(sql1)
+            sql="select p_name from stock_1"
+            cursor.execute(sql)
             data=cursor.fetchall()
 
             products = [row[0] for row in data]
@@ -52,9 +56,9 @@ class Page5:
 
     def __init__(self,ur):
         self.ur = ur
+        self.box()
         self.ur.geometry("1127x781+200+0")
         self.ur.configure(bg = "#FFFFFF")
-        self.box()
         lacn="E:/Python/Storerp/assets/frame5/"
 
         self.canvas = Canvas(
@@ -116,7 +120,7 @@ class Page5:
             image=self.image_image_6
         )
 
-        global Name,Orderid,Gstlab,Address,custid,Phnno
+        global Name,Orderid,Gstlab,Address,Date,Phnno
 
         self.entry_image_1 = PhotoImage(
             file=lacn+"entry_1.png")
@@ -129,6 +133,7 @@ class Page5:
             bd=0,
             bg="#BFBBBB",
             fg="#000716",
+            font=f1,
             highlightthickness=0
         )
         Orderid.place(
@@ -137,6 +142,8 @@ class Page5:
             width=133.0,
             height=31.0
         )
+
+        Orderid.bind("<Return>", lambda event: self.view())
 
         self.entry_image_2 = PhotoImage(
             file=lacn+"entry_2.png")
@@ -148,7 +155,7 @@ class Page5:
         Name = Entry(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0
         )
         Name.place(
@@ -157,6 +164,8 @@ class Page5:
             width=175.0,
             height=31.0
         )
+
+        Name.bind("<Return>", lambda event: self.up_name())
 
         self.entry_image_3 = PhotoImage(
             file=lacn+"entry_3.png")
@@ -168,7 +177,7 @@ class Page5:
         Gstlab = Entry(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0
         )
         Gstlab.place(
@@ -177,6 +186,8 @@ class Page5:
             width=177.0,
             height=31.0
         )
+
+        Gstlab.bind("<Return>", lambda event: self.up_gst())
 
         self.entry_image_4 = PhotoImage(
             file=lacn+"entry_4.png")
@@ -188,7 +199,7 @@ class Page5:
         Phnno = Entry(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0
         )
         Phnno.place(
@@ -197,6 +208,8 @@ class Page5:
             width=160.0,
             height=31.0
         )
+
+        Phnno.bind("<Return>", lambda event: self.up_phn())
 
         self.image_image_7 = PhotoImage(
             file=lacn+"image_7.png")
@@ -213,18 +226,20 @@ class Page5:
             218.5,
             image=self.entry_image_5
         )
-        custid = Entry(self.ur,
+        Date = Entry(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0
         )
-        custid.place(
+        Date.place(
             x=800.0,
             y=202.0,
             width=144.0,
             height=31.0
         )
+
+        Date.bind("<Return>", lambda event: self.up_date())
 
         self.image_image_8 = PhotoImage(
             file=lacn+"image_8.png")
@@ -244,7 +259,7 @@ class Page5:
         Address = Entry(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0
         )
         Address.place(
@@ -254,6 +269,8 @@ class Page5:
             height=47.0
         )
 
+        Address.bind("<Return>", lambda event: self.up_addrs())
+
         self.image_image_9 = PhotoImage(
             file=lacn+"image_9.png")
         self.image_9 = self.canvas.create_image(
@@ -262,30 +279,13 @@ class Page5:
             image=self.image_image_9
         )
 
-        # self.entry_image_7 = PhotoImage(
-        #     file=lacn+"entry_7.png")
-        # self.entry_bg_7 = self.canvas.create_image(
-        #     556.0,
-        #     365.0,
-        #     image=self.entry_image_7
-        # )
-        # self.entry_7 = Text(
-        #     bd=0,
-        #     bg="#D9D9D9",
-        #     fg="#000716",
-        #     highlightthickness=0
-        # )
-        # self.entry_7.place(
-        #     x=36.0,
-        #     y=270.0,
-        #     width=1040.0,
-        #     height=188.0
-        # )
-
-        self.columns=('order_id','prd_name','qty','price','total','date','address')
+        self.columns=('order_id','prd_name','qty','price','total','date','name','gstin','phoneno','address')
         self.scrollbary=Scrollbar(self.ur,orient=VERTICAL)
         self.scrollbarx=Scrollbar(self.ur,orient=HORIZONTAL)
         self.tree=ttk.Treeview(self.canvas,columns=self.columns,show="headings")
+        self.style=ttk.Style()
+        self.style.configure("Treeview",font=f2)
+        self.style.configure("Treeview.Heading",font=f2)
         self.tree.place(
             x=36.0,
             y=270.0,
@@ -307,6 +307,9 @@ class Page5:
         self.tree.heading('price',text="Price")
         self.tree.heading('total',text="Total")
         self.tree.heading('date',text="Date")
+        self.tree.heading('name',text="Name")
+        self.tree.heading('gstin',text="GSTIN")
+        self.tree.heading('phoneno',text="PhoneNo")
         self.tree.heading('address',text="Address")
 
         self.tree.column('#0',stretch=NO,minwidth=25,width=143)
@@ -316,6 +319,9 @@ class Page5:
         self.tree.column('#4',stretch=NO,minwidth=25,width=143)
         self.tree.column('#5',stretch=NO,minwidth=25,width=143)
         self.tree.column('#6',stretch=NO,minwidth=25,width=143)
+        self.tree.column('#7',stretch=NO,minwidth=25,width=143)
+        self.tree.column('#8',stretch=NO,minwidth=25,width=143)
+        self.tree.column('#9',stretch=NO,minwidth=25,width=143)
 
         global Quantity_lab,Desc_lab,Unitprice
         self.entry_image_8 = PhotoImage(
@@ -328,7 +334,7 @@ class Page5:
         Quantity_lab = Spinbox(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0,from_=1,to=1000
         )
         Quantity_lab.place(
@@ -345,7 +351,7 @@ class Page5:
             601.5,
             image=self.entry_image_9
         )
-        Desc_lab = ttk.Combobox(self.ur,
+        Desc_lab = ttk.Combobox(self.ur,font=f1,
             # bd=0,
             # bg="#BFBBBB",
             # fg="#000716",
@@ -371,7 +377,7 @@ class Page5:
         Unitprice = Entry(self.ur,
             bd=0,
             bg="#BFBBBB",
-            fg="#000716",
+            fg="#000716",font=f1,
             highlightthickness=0
         )
         Unitprice.place(
@@ -411,7 +417,7 @@ class Page5:
             image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
-            command=self.button_1_clicked,
+            command=self.up_item,
             relief="flat"
         )
         self.button_1.place(
@@ -459,7 +465,7 @@ class Page5:
             image=self.button_image_4,
             borderwidth=0,
             highlightthickness=0,
-            command=self.button_4_clicked,
+            command=self.update_rec,
             relief="flat"
         )
         self.button_4.place(
@@ -487,20 +493,123 @@ class Page5:
         self.ur.resizable(False, False)
 
 #-----------------------------------------------------------------------------------------------------------------
-       
+
 
     def update_unit_price(self,event):
         selected_product = Desc_lab.get()
         selected_price = prices_list.get(selected_product, 0.0)  # Default to 0.0 if not found
         Unitprice.delete(0, "end")  # Clear existing content
         Unitprice.insert(0, selected_price)
-    def button_1_clicked(self):
-        print("Button 1 clicked")
+    
+    
+    def view(self):
+        try:
+            self.tree.delete(*self.tree.get_children())
+            id1 = Orderid.get()
+            print(id1)
+            # Fetch main data for the treeview
+            sql1 = "select order_id,description,quantity,unit_price,total,i_date,name,gstin,phoneno,address from invoice_2 where order_id=%s;"
+            cursor.execute(sql1, (id1,))
+            data = cursor.fetchall()
+
+            for i, (order_id, description, quantity, unit_price, total, i_date,name,gstin,phoneno, address) in enumerate(data, start=1):
+                self.tree.insert("", "end", values=(order_id, description, quantity, unit_price, total, i_date,name,gstin,phoneno, address))
+        except Exception as e:
+            print("Issue in 1", e)
+            messagebox.showerror("Issue in 1", e)
+
+    def up_name(self):
+        try:
+            n1=Name.get()
+            selected_item=self.tree.selection()[0]
+            current_values = self.tree.item(selected_item, 'values')
+            current_values = current_values[:6] + (n1,) + current_values[7:]
+            self.tree.item(selected_item, values=current_values)
+            #showinfo("success","Name updated successfully")
+            print("Name updated successfully")
+            Name.delete(0,tkinter.END)
+        except Exception as e:
+            print("Error updating Name:", e)
+
+    def up_addrs(self):
+        try:
+            n1=Address.get()
+            selected_item=self.tree.selection()[0]
+            current_values = self.tree.item(selected_item, 'values')
+            current_values = current_values[:9] + (n1,) + current_values[10:]
+            self.tree.item(selected_item, values=current_values)
+            #showinfo("success","Address updated successfully")
+            #print("Name updated successfully")
+            Address.delete(0,tkinter.END)
+        except Exception as e:
+            print("Error updating Name:", e)
+
+    def up_phn(self):
+        try:
+            n1=Phnno.get()
+            selected_item=self.tree.selection()[0]
+            current_values = self.tree.item(selected_item, 'values')
+            current_values = current_values[:8] + (n1,) + current_values[9:]
+            self.tree.item(selected_item, values=current_values)
+            #showinfo("success","Address updated successfully")
+            #print("Name updated successfully")
+            Phnno.delete(0,tkinter.END)
+        except Exception as e:
+            print("Error updating Name:", e)
+    
+    def up_date(self):
+        try:
+            n1=Date.get()
+            selected_item=self.tree.selection()[0]
+            current_values = self.tree.item(selected_item, 'values')
+            current_values = current_values[:5] + (n1,) + current_values[6:]
+            self.tree.item(selected_item, values=current_values)
+            #showinfo("success","Address updated successfully")
+            #print("Name updated successfully")
+            Date.delete(0,tkinter.END)
+        except Exception as e:
+            print("Error updating Name:", e)
+    
+    def up_gst(self):
+        try:
+            n1=Gstlab.get()
+            selected_item=self.tree.selection()[0]
+            current_values = self.tree.item(selected_item, 'values')
+            current_values = current_values[:7] + (n1,) + current_values[8:]
+            self.tree.item(selected_item, values=current_values)
+            #showinfo("success","Address updated successfully")
+            #print("Name updated successfully")
+            Gstlab.delete(0,tkinter.END)
+        except Exception as e:
+            print("Error updating Name:", e)
+
+    def up_item(self):
+        try:
+            n1 = Desc_lab.get()
+            n2 = Quantity_lab.get()
+            n3 = Unitprice.get()
+
+            # Calculate the total
+            total = float(n2) * float(n3)
+
+            selected_item = self.tree.selection()[0]
+            current_values = self.tree.item(selected_item, 'values')
+
+            # Update the 'Description', 'Quantity', 'Unit Price', and 'Total' columns
+            current_values = (current_values[0], n1, n2, n3, total) + current_values[5:]
+            self.tree.item(selected_item, values=current_values)
+
+            # Optionally, you can update the corresponding database record here if needed
+
+            print("Fields updated successfully")
+        except Exception as e:
+            print("Error updating fields:", e)
+
+
     def clear_rec(self):
         try:
-            #id1=order_Id.get()
-            #id2=cust_id.get()
             selected_item=self.tree.selection()[0]
+            
 
             # Extract order_id and description from the tuple
             selected_id = self.tree.item(selected_item, 'values')[0]
@@ -510,53 +619,55 @@ class Page5:
             cursor.execute(sql1,(selected_id,selected_desc))
             con.commit()
             self.tree.delete(selected_item)
-            showinfo("success","Record Cleared")
+            showinfo("success","Deleted Successfully")
         except Exception as e:
             print("Issue", e)
             messagebox.showerror("Issue", e)
-        
+  
 
-    def view(self):
+    def update_rec(self):
         try:
-            self.tree.delete(*self.tree.get_children())
-            id1=Orderid.get()
-            #id2=cust_id.get()
+            self.invoice_list=[]
 
-            sql1="select order_id,description,quantity,unit_price,total,i_date,address from invoice_2 where order_id=%s;"
-            cursor.execute(sql1%(id1))
-            
-            data=cursor.fetchall() 
-            
+            # Iterate over all items in the treeview
+            for item in self.tree.get_children():
+                # Get values from the item
+                values = self.tree.item(item, 'values')
 
-            for i, (order_id,description,quantity,unit_price,total,i_date,address) in enumerate(data, start=1):
-                self.tree.insert("","end",values=(order_id,description,quantity,unit_price,total,i_date,address))
-            
-            sql2 = "SELECT name, address, phoneno, gstin FROM invoice_2 WHERE order_id = %s;"
-            cursor.execute(sql2, (id1,))
-            data2 = cursor.fetchone()
+                # Add the extracted values to invoice_list as a tuple
+                order_id = values[0]
+                product_name = values[1]
+                quantity = values[2]
+                price = values[3]
+                total = values[4]
+                date = values[5]
+                name = values[6]
+                gstin = values[7]
+                phoneno = values[8]
+                address = values[9]
 
-            if data2:
-                # Set values in Entry widgets
-                Name.delete(0, END)
-                Name.insert(0, data2[0])  # Assuming the 'name' column is at index 0
-                Address.delete(0, END)
-                Address.insert(0, data2[1])  # Assuming the 'address' column is at index 1
-                Phnno.delete(0, END)
-                Phnno.insert(0, data2[2])  # Assuming the 'phoneno' column is at index 2
-                Gstlab.delete(0, END)
-                Gstlab.insert(0, data2[3]) 
-            else:
-                print("No data found for order_id:", id1)
+                # Append values as a tuple to invoice_list
+                self.invoice_list.append((order_id, product_name, quantity, price, total, date, name, gstin, phoneno, address))
+
+
+            for item in self.invoice_list:
+                # Extract values from the tuple
+                order_id, product_name, quantity, unit_price, total, date, name, gstin, phoneno, address = item
+                
+                # SQL UPDATE statement
+                sql = "UPDATE invoice_2 SET name=%s, description=%s, quantity=%s, unit_price=%s, total=%s, gstin=%s, phoneno=%s, address=%s, i_date=%s WHERE order_id=%s"
+
+                # Execute the SQL statement
+                cursor.execute(sql, (name, product_name, quantity, unit_price, total, gstin, phoneno, address, date, order_id))
+
+            # Commit the changes to the database
             con.commit()
-            
+
+            showinfo("Success", "Data Updated in Table")
 
         except Exception as e:
             print("Issue", e)
-            #messagebox.showerror("Issue", e)
-        
-
-    def button_4_clicked(self):
-        print("Button 4 clicked")
+            messagebox.showerror("Issue", e)
 
     def exit_ur(self):
         vs=Toplevel()
