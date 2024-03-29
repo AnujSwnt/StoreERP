@@ -84,33 +84,33 @@ class Page6:
             height=44.0
         )
 
-        self.image_image_4 = PhotoImage(
-            file=lacn+"image_4.png")
-        self.image_4 = self.canvas.create_image(
-            427.0,
-            240.0,
-            image=self.image_image_4
-        )
+        # self.image_image_4 = PhotoImage(
+        #     file=lacn+"image_4.png")
+        # self.image_4 = self.canvas.create_image(
+        #     427.0,
+        #     240.0,
+        #     image=self.image_image_4
+        # )
 
-        self.entry_image_2 = PhotoImage(
-            file=lacn+"entry_2.png")
-        self.entry_bg_2 = self.canvas.create_image(
-            580.0,
-            244.0,
-            image=self.entry_image_2
-        )
-        cust_Id = Entry(self.dr,
-            bd=0,
-            bg="#BFBBBB",
-            fg="#000716",
-            highlightthickness=0
-        )
-        cust_Id.place(
-            x=489.0,
-            y=221.0,
-            width=182.0,
-            height=44.0
-        )
+        # self.entry_image_2 = PhotoImage(
+        #     file=lacn+"entry_2.png")
+        # self.entry_bg_2 = self.canvas.create_image(
+        #     580.0,
+        #     244.0,
+        #     image=self.entry_image_2
+        # )
+        # cust_Id = Entry(self.dr,
+        #     bd=0,
+        #     bg="#BFBBBB",
+        #     fg="#000716",
+        #     highlightthickness=0
+        # )
+        # cust_Id.place(
+        #     x=489.0,
+        #     y=221.0,
+        #     width=182.0,
+        #     height=44.0
+        # )
 
         self.button_image_1 = PhotoImage(
             file=lacn+"button_1.png")
@@ -154,10 +154,15 @@ class Page6:
             relief="flat"
         )
         self.button_3.place(
+            # x=271.0,
+            # y=713.0,
+            # width=183.0,
+            # height=49.0
             x=271.0,
             y=713.0,
             width=183.0,
             height=49.0
+
         )
 
         # self.entry_image_3 = PhotoImage(

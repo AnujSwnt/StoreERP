@@ -514,10 +514,11 @@ class Page1:
         gst=lab_gstin.get()
         phone=lab_phnno.get()
         add=lab_address.get()
-        ord_id=lab_orderid.get()
+        ord_id=lab_orderid.get()#"%m%d%Y%H%M%S"
 
         try:
-            idate=datetime.now().strftime("%Y%m%d")
+            idate=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print(idate)
             sql = "INSERT INTO invoice_2(order_id, name, description, quantity, unit_price, gstin, phoneno, address, total,i_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
 
             for item in self.invoice_list:
@@ -571,7 +572,7 @@ class Page1:
             messagebox.showerror("Issue", str(e))
             return
 
-
+        
         try:
             subtotal=sum(item[3] for item in self.invoice_list)
             tax=0.09

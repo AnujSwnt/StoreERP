@@ -1,0 +1,18 @@
+OrderId,Description,Quantity,Unit_Price,Total,Date,Address
+100,Battery,5.00,10.00,50.00,2024-01-10,25\,Terna
+101,Tab,4.00,21.00,84.00,2024-01-11,21\,Mt.Kailas
+101,Mouse,1.00,10.00,10.00,2024-01-11,21\,Mt.Kailas
+102,USB-C Charging Cable,3.00,12.99,38.97,2024-01-13,25\,Murfy Villa
+102,Lightning Charging Cable,2.00,14.99,29.98,2024-01-13,25\,Murfy Villa
+103,Apple Airpods Headphones,3.00,149.99,449.97,2024-01-13,23\,Terna
+105,27in FHD Monitor,1.00,220.00,220.00,2024-01-13,25\,Terna Clg
+106,Lightning Charging Cable,2.00,14.99,29.98,2024-01-13,21\,Fanh
+108,AAA Batteries (4-pack),4.00,6.99,27.96,2024-01-22,sdqwerqe
+109,AAA Batteries (4-pack),8.00,6.99,55.92,2024-01-22,dsafsw
+110,Lightning Charging Cable,3.00,14.99,44.97,2024-01-22,25sad
+111,Wired Headphones,5.00,30.00,150.00,2024-03-22,22\,Terna
+111,Bose SoundSport Headphones,4.00,120.00,480.00,2024-03-22,22\,Terna
+111,27in FHD Monitor,4.00,220.00,880.00,2024-03-22,22\,Terna
+112,Wired Headphones,4.00,30.00,120.00,2024-03-22,22\,Terna
+113,iPhone,2.00,1550.00,3100.00,2024-03-23,Shanti Nagar
+113,27in 4K Gaming Monitor,4.00,420.00,1680.00,2024-03-23,Shanti Nagar

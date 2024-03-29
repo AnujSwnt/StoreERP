@@ -26,7 +26,7 @@ from decimal import Decimal
 import gui1 
 import gui2 
 import gui3
-import gui7
+import gui8
 
 
 class Page0:
@@ -526,10 +526,10 @@ class Page0:
         ig.deiconify()
 
     def anl(self):
-        aw=Toplevel(self.window)
-        gui7.Page7(aw)
+        pw=Toplevel(self.window)
+        gui8.Page8(pw)
         self.window.withdraw()
-        aw.deiconify()
+        pw.deiconify()
 
     def prd(self):
         print("Button1 perd clicked")

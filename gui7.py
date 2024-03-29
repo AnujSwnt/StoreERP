@@ -23,7 +23,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import gui0
 
 warnings.filterwarnings("ignore", category=FutureWarning)
-
+f=("Arial",18, "bold")
 class Page7:
     def __init__(self,aw):
         self.aw=aw
@@ -84,6 +84,17 @@ class Page7:
             text="TIME:",
             fill="#000000",
             font=("Hanuman Bold", 32 * -1)
+        )
+
+        self.path=Entry(self.aw,bd=0,
+          bg="#D9D9D9",
+          fg="#000716",
+          highlightthickness=0)
+        self.path.place(
+            x=226.0,
+          y=154.0,
+          width=390.0,
+          height=40.0
         )
 
         self.button_image_1 = PhotoImage(
@@ -153,9 +164,10 @@ class Page7:
         self.button_image_3 = PhotoImage(
             file=lacn+"button_3.png")
         self.button_3 = Button(self.aw,
-            image=self.button_image_3,
+            #image=self.button_image_3,
+            text="What is the best time of sale?",
             borderwidth=0,
-            highlightthickness=0,
+            highlightthickness=0,font=f,
             command=self.button3,
             relief="flat"
         )
@@ -204,8 +216,8 @@ class Page7:
         
     def button2(self):
         try:
-           
-            all_data=pd.read_csv("E:/Python/Storerp/Test_data/all_data_exe.csv")
+            path=self.path.get()
+            all_data=pd.read_csv(path)
             all_data['Sales'] = all_data['Quantity Ordered'].astype('int') * all_data['Price Each'].astype('float')
             monthly_sales=all_data.groupby(['Month']).sum()
 
@@ -214,7 +226,7 @@ class Page7:
             ax = fig.add_subplot(111)
 
             # Plot the bar chart
-            months = range(1, 13)
+            months = range(1, 14)
             ax.bar(months, monthly_sales['Sales'], color="deepskyblue")
             ax.set_xticks(months)
             ax.set_ylabel('Sales in USD ($)')

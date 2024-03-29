@@ -210,29 +210,29 @@ class Page3:
             height=57.0
         )
 
-        self.image_image_6 = PhotoImage(
-            file=lacn+"image_6.png")
-        self.image_6 = self.canvas.create_image(
-            294.0,
-            510.0,
-            image=self.image_image_6
-        )
+        # self.image_image_6 = PhotoImage(
+        #     file=lacn+"image_6.png")
+        # self.image_6 = self.canvas.create_image(
+        #     294.0,
+        #     510.0,
+        #     image=self.image_image_6
+        # )
 
-        self.image_image_7 = PhotoImage(
-            file=lacn+"image_7.png")
-        self.image_7 = self.canvas.create_image(
-            519.0,
-            508.0,
-            image=self.image_image_7
-        )
+        # self.image_image_7 = PhotoImage(
+        #     file=lacn+"image_7.png")
+        # self.image_7 = self.canvas.create_image(
+        #     519.0,
+        #     508.0,
+        #     image=self.image_image_7
+        # )
 
-        self.image_image_8 = PhotoImage(
-            file=lacn+"image_8.png")
-        self.image_8 = self.canvas.create_image(
-            765.0,
-            508.0,
-            image=self.image_image_8
-        )
+        # self.image_image_8 = PhotoImage(
+        #     file=lacn+"image_8.png")
+        # self.image_8 = self.canvas.create_image(
+        #     765.0,
+        #     508.0,
+        #     image=self.image_image_8
+        # )
 
         self.image_image_9 = PhotoImage(
             file=lacn+"image_9.png")
@@ -271,33 +271,33 @@ class Page3:
             height=39.0
         )
 
-        self.image_image_11 = PhotoImage(
-            file=lacn+"image_11.png")
-        self.image_11 = self.canvas.create_image(
-            94.0,
-            449.0,
-            image=self.image_image_11
-        )
+        # self.image_image_11 = PhotoImage(
+        #     file=lacn+"image_11.png")
+        # self.image_11 = self.canvas.create_image(
+        #     94.0,
+        #     449.0,
+        #     image=self.image_image_11
+        # )
 
-        self.entry_image_3 = PhotoImage(
-            file=lacn+"entry_3.png")
-        self.entry_bg_3 = self.canvas.create_image(
-            99.0,
-            487.5,
-            image=self.entry_image_3
-        )
-        cust_id = Entry(self.vs,
-            bd=0,
-            bg="#BFBBBB",
-            fg="#000716",
-            highlightthickness=0
-        )
-        cust_id.place(
-            x=29.0,
-            y=467.0,
-            width=140.0,
-            height=39.0
-        )
+        # self.entry_image_3 = PhotoImage(
+        #     file=lacn+"entry_3.png")
+        # self.entry_bg_3 = self.canvas.create_image(
+        #     99.0,
+        #     487.5,
+        #     image=self.entry_image_3
+        # )
+        # cust_id = Entry(self.vs,
+        #     bd=0,
+        #     bg="#BFBBBB",
+        #     fg="#000716",
+        #     highlightthickness=0
+        # )
+        # cust_id.place(
+        #     x=29.0,
+        #     y=467.0,
+        #     width=140.0,
+        #     height=39.0
+        # )
 
         self.button_image_3 = PhotoImage(
             file=lacn+"button_3.png")
@@ -454,8 +454,8 @@ class Page3:
     
     def dwnld_csv(self):
         try:
-            # sql="SELECT 'OrderId', 'Description', 'Quantity', 'Unit_Price', 'Total', 'Date', 'Address' UNION SELECT order_id, description, quantity, unit_price, total, i_date, address INTO OUTFILE 'E:/Python/Storerp/StoreSalesData/SalesRecord.csv' FIELDS TERMINATED BY ',' FROM invoice_2"
-            sql1 = "SELECT 'OrderId', 'Description', 'Quantity', 'Unit_Price', 'Total', 'Date', 'Address' UNION SELECT order_id, description, quantity, unit_price, total, i_date, address INTO OUTFILE 'E:/Python/Storerp/StoreSalesData/"
+            
+            sql1 = "SELECT 'OrderId','Name','Description', 'Quantity', 'Unit_Price', 'Total', 'GSTIN','Phoneno','Date' UNION SELECT order_id, name,description, quantity, unit_price, total,gstin,phoneno, i_date  INTO OUTFILE 'E:/Python/Storerp/StoreSalesData/"
             doc_name = "SalesRecord" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".csv"
             sql2 = "' FIELDS TERMINATED BY ',' FROM invoice_2"
             sql = sql1 + doc_name + sql2
