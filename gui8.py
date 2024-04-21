@@ -289,7 +289,7 @@ class Page8:
           # Format the document name
           doc_name = "SalesRecord_" + str(last_day_of_previous_month.year) + "_" + previous_month_name + ".csv"
 
-          sql2 = f"' FIELDS TERMINATED BY ',' FROM invoice_2 WHERE i_date >= '{first_day_of_previous_month.strftime('%Y-%m-%d')}' AND i_date <= '{last_day_of_previous_month.strftime('%Y-%m-%d')}'"
+          sql2 = f"' FIELDS TERMINATED BY ',' FROM invoice_2 WHERE DATE(i_date) >= '{first_day_of_previous_month.strftime('%Y-%m-%d')}' AND DATE(i_date) <= '{last_day_of_previous_month.strftime('%Y-%m-%d')}'"
           sql = sql1 + doc_name + sql2
           cursor.execute(sql)
           con.commit()

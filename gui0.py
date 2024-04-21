@@ -26,7 +26,7 @@ from decimal import Decimal
 import gui1 
 import gui2 
 import gui3
-import gui8
+import gui8,gui10
 
 
 class Page0:
@@ -532,7 +532,10 @@ class Page0:
         pw.deiconify()
 
     def prd(self):
-        print("Button1 perd clicked")
+        p1w=Toplevel(self.window)
+        gui10.Page10(p1w)
+        self.window.withdraw()
+        p1w.deiconify()
 
 def page():
     window=Tk()

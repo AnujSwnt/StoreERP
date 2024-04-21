@@ -216,7 +216,8 @@ class Page7:
         
     def button2(self):
         try:
-            path=self.path.get()
+            #path=self.path.get()
+            path="E:/Python/Storerp/Test_data/all_data_exe.csv"
             all_data=pd.read_csv(path)
             all_data['Sales'] = all_data['Quantity Ordered'].astype('int') * all_data['Price Each'].astype('float')
             monthly_sales=all_data.groupby(['Month']).sum()
@@ -226,10 +227,10 @@ class Page7:
             ax = fig.add_subplot(111)
 
             # Plot the bar chart
-            months = range(1, 14)
+            months = range(1, 13)
             ax.bar(months, monthly_sales['Sales'], color="deepskyblue")
             ax.set_xticks(months)
-            ax.set_ylabel('Sales in USD ($)')
+            ax.set_ylabel('Sales in Rs. (₹)')
             ax.set_xlabel('Month number')
             ax.set_title('Sales chart')
             ax.grid(visible=True)

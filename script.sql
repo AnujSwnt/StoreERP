@@ -23,52 +23,13 @@
 ---write a XGBoost python program to predict sales on given data fields and plot a line chart at end Order ID,	Product	Quantity ,	Price Each	,Order Date,	Purchase Address.
 
 
-
---# Import necessary libraries
-import pandas as pd
-import xgboost as xgb
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-import matplotlib.pyplot as plt
-
-# Load the dataset (assuming you have a CSV file named 'sales_data.csv')
-data = pd.read_csv('sales_data.csv')
-
-# Feature engineering: Convert 'Order Date' to datetime and create new features if needed
-data['Order Date'] = pd.to_datetime(data['Order Date'])
-data['Month'] = data['Order Date'].dt.month
-data['Day'] = data['Order Date'].dt.day
-
-# Select features and target variable
-features = ['Quantity', 'Price Each', 'Month', 'Day']
-target = 'Sales'
-
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(data[features], data[target], test_size=0.2, random_state=42)
-
-# Create XGBoost regressor
-xg_reg = xgb.XGBRegressor(objective ='reg:squarederror', colsample_bytree = 0.3, learning_rate = 0.1,
-                max_depth = 5, alpha = 10, n_estimators = 100)
-
-# Fit the model
-xg_reg.fit(X_train, y_train)
-
-# Predict on the test set
-y_pred = xg_reg.predict(X_test)
-
-# Evaluate the model
-rmse = mean_squared_error(y_test, y_pred, squared=False)
-print(f"Root Mean Squared Error: {rmse}")
-
-# Plotting the predicted vs actual sales
-plt.figure(figsize=(10, 6))
-plt.plot(y_test.reset_index(drop=True), label='Actual Sales', linestyle='--', marker='o')
-plt.plot(pd.Series(y_pred), label='Predicted Sales', linestyle='--', marker='o')
-plt.xlabel('Test Samples')
-plt.ylabel('Sales')
-plt.title('Actual vs Predicted Sales')
-plt.legend()
-plt.show()
+--LOAD DATA INFILE 'E:/Python/Storerp/StoreSalesData/SalesRecord2024-01-23-12-15-43.csv'
+INTO TABLE invoice_2
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(order_id, description, quantity, unit_price, total, i_date, address)
+SET name = NULL, gstin = NULL, phoneno = NULL;
 
 
-INSERT INTO stock_2 (product_id, p_name) SELECT product_id, p_name FROM stock_1;
+LOAD DATA INFILE 'E:/Python/Storerp/StoreSalesData/EntryData.csv' INTO table invoice_2 FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' (order_id,name,description, quantity, unit_price, total, gstin,phoneno,address,i_date);
